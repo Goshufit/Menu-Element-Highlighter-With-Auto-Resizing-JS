@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Follow Along Nav</title>
   <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
   <h2>GOSHU</h2>
   <nav class="top">
@@ -18,56 +20,39 @@
         <div class="dropdown dropdown1">
           <div class="bio">
             <img src="../img/Me.jpg">
-            <p>Goshu is here to develop the dreams of others in the digital world so the phyical world can become more like a dream with limitless possibilities.</p>
+            <p>Goshu is here to develop the dreams of others in the digital world so the phyical world can become more
+              like a dream with limitless possibilities.</p>
           </div>
         </div>
       </li>
       <li>
-        <a href="#">Courses</a>
+        <a href="#">Projects</a>
         <ul class="dropdown courses">
           <li>
-            <span class="code">RFB</span>
-            <a href="https://ReactForBeginners.com">React For Beginners</a>
+            <span class="code">HTML & CSS</span>
+            <a href="https://goshufit.github.io/Video-Streaming-Website/">Video Streaming Site</a>
           </li>
           <li>
-            <span class="code">ES6</span>
-            <a href="https://ES6.io">ES6 For Everyone</a>
+            <span class="code">HTML & CSS</span>
+            <a href="https://goshufit.github.io/Agency-Website/">Agency Site</a>
           </li>
           <li>
-            <span class="code">NODE</span>
-            <a href="https://LearnNode.com">Learn Node</a>
+            <span class="code">Bootstrap</span>
+            <a href="https://goshufit.github.io/Bootstrap-Website/">Bootstrap Web Developer Bootcamp</a>
           </li>
           <li>
-            <span class="code">STPU</span>
-            <a href="https://SublimeTextBook.com">Sublime Text Power User</a>
+            <span class="code">Bootstrap</span>
+            <a href="https://goshufit.github.io/Bootstrap-Website-Number-2/">Web Developer Landing Page</a>
           </li>
           <li>
-            <span class="code">WTF</span>
-            <a href="http://Flexbox.io">What The Flexbox?!</a>
-          </li>
-          <li>
-            <span class="code">GRID</span>
-            <a href="https://CSSGrid.io">CSS Grid</a>
-          </li>
-          <li>
-            <span class="code">LRX</span>
-            <a href="http://LearnRedux.com">Learn Redux</a>
-          </li>
-          <li>
-            <span class="code">CLPU</span>
-            <a href="http://CommandLinePowerUser.com">Command Line Power User</a>
-          </li>
-          <li>
-            <span class="code">MMD</span>
-            <a href="http://MasteringMarkdown.com">Mastering Markdown</a>
+            <span class="code">JavaScript</span>
+            <a href="https://goshufit.github.io/JS-Painting-Canvas/">Painting Canvas</a>
           </li>
         </ul>
       </li>
       <li>
         <a href="#">Other Links</a>
         <ul class="dropdown dropdown3">
-          <li><a class="button" href="http://twitter.com">Twitter</a></li>
-          <li><a class="button" href="http://facebook.com">Facebook</a></li>
           <li><a class="button" href="https://github.com/Goshufit">Github</a></li>
           <li><a class="button" href="https://www.linkedin.com/in/jean-pierre-graham-337462a5/">LinkedIn</a></li>
         </ul>
@@ -75,24 +60,45 @@
     </ul>
   </nav>
 
-<script>
+  <script>
 
-const triggers = document.querySelectorAll('.cool > li');
-const background = document.querySelector('.dropdownBackground');
-const nav = document.querySelector('.top');
+    const triggers = document.querySelectorAll('.cool > li');
+    const background = document.querySelector('.dropdownBackground');
+    const nav = document.querySelector('.top');
 
-function handleEnter() {
-this.classList.add('trigger-enter');
-setTimeout(() => this.classList.add('trigger-enter-active'),150);
-}
+    function handleEnter() {
+      this.classList.add('trigger-enter');
+      setTimeout(() => {
+        if (this.classList.contains('trigger-enter')) {
+          this.classList.add('trigger-enter-active')
+        }
+      }, 150);
+      background.classList.add('open');
 
-function handleLeave() {
-    this.classList.remove('trigger-enter', 'trigger-enter-active');
-}
+      const dropdown = this.querySelector('.dropdown');
+      const dropdownCoords = dropdown.getBoundingClientRect();
+      const navCoords = nav.getBoundingClientRect();
+      const coords = {
+        height: dropdownCoords.height,
+        width: dropdownCoords.width,
+        top: dropdownCoords.top - navCoords.top,
+        left: dropdownCoords.left - navCoords.left
+      };
 
-triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
-triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
-</script>
+      background.style.setProperty('width', `${coords.width}px`);
+      background.style.setProperty('height', `${coords.height}px`);
+      background.style.setProperty('transform', `translate(${coords.left}px, ${coords.top}px`)
+    }
+
+    function handleLeave() {
+      this.classList.remove('trigger-enter', 'trigger-enter-active');
+      background.classList.remove('open');
+    }
+
+    triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
+    triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
+  </script>
 
 </body>
+
 </html>
